@@ -1,0 +1,32 @@
+{
+  "name": "postcss-font-weight-names",
+  "version": "0.0.0",
+  "description": "PostCSS plugin to allow the use of common font-weight names i.e. Thin, Semi Bold, Heavy, etc.",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "font-weight"
+  ],
+  "author": "Dan Gamble <dangamble89@gmail.com>",
+  "license": "MIT",
+  "repository": "dan-gamble/postcss-font-weight-names",
+  "bugs": {
+    "url": "https://github.com/dan-gamble/postcss-font-weight-names/issues"
+  },
+  "homepage": "https://github.com/dan-gamble/postcss-font-weight-names",
+  "dependencies": {
+    "postcss": "^5.0.16"
+  },
+  "devDependencies": {
+    "ava": "^0.12.0",
+    "eslint": "^2.1.0",
+    "eslint-config-postcss": "^2.0.0"
+  },
+  "scripts": {
+    "test": "ava && eslint *.js"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-postcss/es5"
+  }
+}
