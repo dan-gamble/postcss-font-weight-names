@@ -10,6 +10,11 @@
 [ci-img]:  https://travis-ci.org/dan-gamble/postcss-font-weight-names.svg
 [ci]:      https://travis-ci.org/dan-gamble/postcss-font-weight-names
 
+#### Installation
+```
+npm install postcss-font-weight-names
+```
+
 #### Before
 ```css
 .font-weight {
