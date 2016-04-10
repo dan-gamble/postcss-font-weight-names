@@ -1,7 +1,7 @@
 {
   "name": "postcss-font-weight-names",
-  "version": "0.0.0",
-  "description": "PostCSS plugin to allow the use of common font-weight names i.e. Thin, Semi Bold, Heavy, etc.",
+  "version": "1.0.0",
+  "description": "PostCSS plugin to convert commonly used font-weight names i.e. Thin, Semi Bold, Heavy, etc.. to a numeric font-weight",
   "keywords": [
     "postcss",
     "css",
