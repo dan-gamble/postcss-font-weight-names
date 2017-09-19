@@ -92,6 +92,13 @@ test('handles underscore separators', t => {
     );
 });
 
+test('handles omitted separators', t => {
+    return run(t,
+        'a{ font-weight: extra_light; font-weight: semibold; }',
+        'a{ font-weight: 200; font-weight: 600; }'
+    );
+});
+
 test('handles false values', t => {
     return run(t,
         'a{ font-weight: xtra light; font-weight: boldest; }',
