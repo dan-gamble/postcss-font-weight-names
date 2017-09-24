@@ -1,5 +1,4 @@
 var postcss = require('postcss');
-var _ = require('lodash');
 
 var nameMapping = {
     100: ['thin', 'hairline'],
@@ -13,25 +12,37 @@ var nameMapping = {
     900: ['black', 'heavy']
 };
 
-module.exports = postcss.plugin('postcss-font-weight-names', function () {
-    return function (css) {
-        var nameMappingValues = _.values(nameMapping);
-        // Flatten it so it's easier to check if it contains our prop's value
-        var nameMappingValuesFlattened = _.flatten(nameMappingValues);
+var reSpace = /\s/g;
+function removeSpace(str) {
+    return str.replace(reSpace, '');
+}
 
-        css.walkDecls('font-weight', function (decl) {
-            var value = _.split(decl.value.toLowerCase(), /[ -_]/).join(' ');
+function indexNumericKeywords(nameMap) {
+    return Object.keys(nameMap)
+        .reduce(function (indexAccumulator, numericKey) {
+            var keywords = nameMap[numericKey];
 
-            if (_.includes(nameMappingValuesFlattened, value)) {
-                // The key which will be used as the new decl value
-                var matchedKey = null;
-
-                Object.keys(nameMapping).forEach(function (key) {
-                    if (_.includes(nameMapping[key], value)) {
-                        matchedKey = key;
-                    }
+            keywords
+                .map(removeSpace)
+                .forEach(function (keyword) {
+                    indexAccumulator[keyword] = numericKey;
                 });
 
+            return indexAccumulator;
+        }, {});
+}
+
+module.exports = postcss.plugin('postcss-font-weight-names', function () {
+    var indexedNames = indexNumericKeywords(nameMapping);
+    var reSeperator = /[ -_]+/;
+
+    return function (css) {
+        css.walkDecls('font-weight', function (decl) {
+            var value = decl.value.toLowerCase().replace(reSeperator, '');
+            // The key which will be used as the new decl value
+            var matchedKey = indexedNames[value];
+
+            if (matchedKey) {
                 // Create the new font-weight value with a numeric value
                 decl.cloneBefore({ prop: 'font-weight', value: matchedKey });
 
